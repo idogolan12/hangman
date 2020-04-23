@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void animal(View view) {
-        Intent go = new Intent(this, hangman.class);
+        Intent go = new Intent(this,hangman.class);
         startActivity(go);
+
     }
 }
