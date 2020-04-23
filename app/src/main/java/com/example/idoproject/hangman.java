@@ -60,7 +60,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
     private void newGame() {
         counter = 0;
         LLLet = findViewById(R.id.LLLet);
-        is = getResources().openRawResource(R.raw.nimal);
+        is = getResources().openRawResource(R.raw.animal);
         isr = new InputStreamReader(is);
         br = new BufferedReader(isr);
         LLLet.removeAllViews();
