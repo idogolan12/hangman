@@ -124,8 +124,8 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
                     if (counter == av.length())
                     {
                         AlertDialog.Builder ads = new AlertDialog.Builder(this);
-                    ads.setTitle("איש תלוי                                                ");
-                    ads.setMessage("כל הכבוד! הצלחת לנחש את המילה :) מה ברצונך לעשות");
+                    ads.setTitle("כל הכבוד!                                              ");
+                    ads.setMessage( "הצלחת לנחש את המילה" +" " +"*"+av+"*"+ "\n" +"מה ברצונך לעשות?" );
                     ads.setPositiveButton("להמשיך", new DialogInterface.OnClickListener()
                     {
                         @Override
@@ -177,7 +177,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
         Toast.makeText(this, "finish game", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setTitle( "לא הצלחת לנחש את המילה והפסדת:(      "  );
-        adb.setMessage("המילה הייתה" + " " + "*" + av + "*" + " " + "מה תרצה לעשות");
+        adb.setMessage("המילה הייתה" + " " + "*" + av + "*" + " " + "מה תרצה לעשות?");
         adb.setPositiveButton("לשחק שוב באותו נושא", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
