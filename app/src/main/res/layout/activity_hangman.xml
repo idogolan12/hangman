@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hangman"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="333dp"
+        android:layout_height="263dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@null"
+        app:srcCompat="@drawable/a"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/LLLet"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@null"
+        android:gravity="center"
+        android:orientation="horizontal"
+        ></LinearLayout>
+
+    <GridLayout
+        android:id="@+id/BGT"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:background="@null"
+        android:columnCount="7">
+
+    </GridLayout>
+
+</LinearLayout>
