@@ -41,7 +41,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
     int size;
     int counter = 0;
     String wordesType;
-    int[] files = {R.raw.animal, R.raw.countries};
+    int[] files = {R.raw.animal, R.raw.countries,R.raw.cities};
 
 
     @Override
@@ -66,8 +66,10 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
         //is = getResources().openRawResource(files[wordesType]);
         if (wordesType.equals("a"))
             is = getResources().openRawResource(files[0]);
-        if (wordesType.equals("c"))
+        if (wordesType.equals("b"))
             is = getResources().openRawResource(files[1]);
+        if (wordesType.equals("c"))
+            is = getResources().openRawResource(files[2]);
         isr = new InputStreamReader(is);
         br = new BufferedReader(isr);
         LLLet.removeAllViews();
@@ -122,7 +124,6 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //do it only when it is the first time the letter is pushed
         String a = ((Button) v).getText().toString();
         if (v.getId() != R.id.bt1)
         {
@@ -183,6 +184,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         }
+        v.setId(R.id.bt2);
     }
 
 

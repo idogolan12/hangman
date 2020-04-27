@@ -30,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void countries(View view) {
         Intent go = new Intent(this,hangman.class);
-        go.putExtra("wordesType", "c");
+        go.putExtra("wordesType", "b");
+        startActivity(go);
+    }
+
+    public void cities(View view) {
+        Intent go = new Intent(this,hangman.class);
+        go.putExtra("wordesType","c");
         startActivity(go);
     }
 }
