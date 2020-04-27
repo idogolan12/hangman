@@ -9,7 +9,6 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -115,6 +114,8 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
             String ab = a.charAt(i) + "";
             bt[i].setText(ab);
             bt[i].setOnClickListener(this);
+            bt[i].setBackgroundColor(0xFFFFFFF9);
+
         }
 
     }
@@ -141,6 +142,10 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
                             ads.setPositiveButton("להמשיך", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    for (int i = 0 ; i < bt.length; i++)
+                                    {
+                                        bt[i].setBackgroundColor(0xFFFFFFF9);
+                                    }
                                     newGame();
                                 }
                             });
@@ -167,7 +172,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
                 {
                     IV.setImageResource(IVS[aa]);
                     aa++;
-                    Toast.makeText(this, "dosen't exist", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "dosen't exist", Toast.LENGTH_SHORT).show();
                     v.setBackgroundColor(0xFFFF0000);
                     v.setId(R.id.bt1);
                 }
@@ -183,13 +188,15 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
 
     private void finishGame()
     {
-        Toast.makeText(this, "finish game", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "finish game", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setTitle( "לא הצלחת לנחש את המילה והפסדת:(      "  );
         adb.setMessage("המילה הייתה" + " " + "*" + av + "*" + " " + "מה תרצה לעשות?");
         adb.setPositiveButton("לשחק שוב באותו נושא", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                go = new Intent(getApplicationContext(),hangman.class);
+                go.putExtra("wordesType",wordesType.toString());
                 startActivity(go);
             }
         });
@@ -197,7 +204,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                  go = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(go);
+                 startActivity(go);
 
 
             }
