@@ -1,8 +1,5 @@
 package com.example.idoproject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,6 +41,8 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
     String st;
     int size;
     int counter = 0;
+    String wordesType;
+    int[] files = {R.raw.animal, R.raw.countries};
 
 
     @Override
@@ -49,10 +51,12 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_hangman);
         BGT = findViewById(R.id.BGT);
         IV = findViewById(R.id.iv);
-        go = new Intent(this,hangman.class);
+        go = new Intent(this,MainActivity.class);
+        Intent i = getIntent();
+        wordesType = i.getStringExtra("wordesType");
         BGT.setColumnCount(11);
-        Build_board2();
         newGame();
+        Build_board2();
 
 
     }
@@ -60,7 +64,11 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
     private void newGame() {
         counter = 0;
         LLLet = findViewById(R.id.LLLet);
-        is = getResources().openRawResource(R.raw.animal);
+        //is = getResources().openRawResource(files[wordesType]);
+        if (wordesType.equals("a"))
+            is = getResources().openRawResource(files[0]);
+        if (wordesType.equals("c"))
+            is = getResources().openRawResource(files[1]);
         isr = new InputStreamReader(is);
         br = new BufferedReader(isr);
         LLLet.removeAllViews();
@@ -82,6 +90,7 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
         tv = new TextView[words.get(num).length()];
         Build_board1(words.get(num).length() , words.get(num));
         av = words.get(num);
+
     }
 
 
@@ -112,65 +121,65 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        //do it only when it is the first time the letter is pushed
         String a = ((Button) v).getText().toString();
-        if (av.indexOf(((Button) v).getText().toString()) != -1)
+        if (v.getId() != R.id.bt1)
         {
-            for (int i = 0; i < av.length(); i++)
-            {
-                if (((Button) v).getText().equals(av.charAt(i) + ""))
-                {
-                    tv[av.length() - i - 1].setText(((Button) v).getText());
-                    counter++;
-                    if (counter == av.length())
-                    {
-                        AlertDialog.Builder ads = new AlertDialog.Builder(this);
-                    ads.setTitle("כל הכבוד!                                              ");
-                    ads.setMessage( "הצלחת לנחש את המילה" +" " +"*"+av+"*"+ "\n" +"מה ברצונך לעשות?" );
-                    ads.setPositiveButton("להמשיך", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            newGame();
+            if (av.indexOf(((Button) v).getText().toString()) != -1) {
+                for (int i = 0; i < av.length(); i++) {
+                    if (((Button) v).getText().equals(av.charAt(i) + "")) {
+                        tv[av.length() - i - 1].setText(((Button) v).getText());
+                        v.setBackgroundColor(0xFF00FF00);
+                        v.setId(R.id.bt1);
+
+
+                        counter++;
+                        if (counter == av.length()) {
+                            AlertDialog.Builder ads = new AlertDialog.Builder(this);
+                            ads.setTitle("כל הכבוד!                                              ");
+                            ads.setMessage("הצלחת לנחש את המילה" + " " + "*" + av + "*" + "\n" + "מה ברצונך לעשות?");
+                            ads.setPositiveButton("להמשיך", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    newGame();
+                                }
+                            });
+                            ads.setNegativeButton("לצאת", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                            AlertDialog ad = ads.create();
+                            ad.show();
                         }
-                    });
-                    ads.setNegativeButton("לצאת", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(hangman.this, "aa", Toast.LENGTH_SHORT).show();
-                        }
-                    });
 
-                    AlertDialog ad = ads.create();
-                    ad.show();
-                }
+
+                    }
 
 
                 }
-
-
-            }
-        }
-        else
-        {
-            if(aa < 5)
-            {
-                IV.setImageResource(IVS[aa]);
-                aa++;
-                Toast.makeText(this, "dosen't exist", Toast.LENGTH_SHORT).show();
             }
             else
-            {
-                IV.setImageResource(IVS[aa]);
-                finishGame();
+                {
+                if (aa < 5)
+                {
+                    IV.setImageResource(IVS[aa]);
+                    aa++;
+                    Toast.makeText(this, "dosen't exist", Toast.LENGTH_SHORT).show();
+                    v.setBackgroundColor(0xFFFF0000);
+                    v.setId(R.id.bt1);
+                }
+                else
+                    {
+                    IV.setImageResource(IVS[aa]);
+                    finishGame();
+                }
             }
-
-
-
-
-
         }
     }
+
 
     private void finishGame()
     {
@@ -187,13 +196,16 @@ public class hangman extends AppCompatActivity implements View.OnClickListener {
         adb.setNeutralButton("משחקי איש תלוי בנושאים אחרים", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                 go = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(go);
+
 
             }
         });
         adb.setNegativeButton("לצאת", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(hangman.this, "aa", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

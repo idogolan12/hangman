@@ -1,12 +1,11 @@
 package com.example.idoproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button bt1,bt2,bt3;
@@ -25,8 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void animal(View view) {
         Intent go = new Intent(this,hangman.class);
+        go.putExtra("wordesType", "a");
         startActivity(go);
+    }
 
-
+    public void countries(View view) {
+        Intent go = new Intent(this,hangman.class);
+        go.putExtra("wordesType", "c");
+        startActivity(go);
     }
 }

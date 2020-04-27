@@ -22,6 +22,7 @@
         android:id="@+id/bt2"
         android:layout_width="197dp"
         android:layout_height="43dp"
+        android:onClick="countries"
         android:text="ערים בישראל"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
